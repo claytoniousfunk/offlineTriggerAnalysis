@@ -53,7 +53,7 @@ bool isQualityMuon(double muPt,
 			muChi2NDF > 10 ||
 			TMath::Abs(muInnerD0) > 0.2 ||
 			TMath::Abs(muInnerDz) > 0.5 ||
-			muMuonHits <= 10 ||
+			muMuonHits <= 0 ||
 			muPixelHits <= 0 ||
 			muIsTracker == 0 ||
 			muStations  <= 1 ||
