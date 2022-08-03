@@ -71,17 +71,17 @@ void offlineTriggerAnalysis(
 	TH1D *muPt_trigOn[5];
 	TH1D *muPt_all[5];
 
-	TH1D *muPt_trigOn[0] = new TH1D("muPt_trigOn_C0","muPt_trigOn, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_trigOn[1] = new TH1D("muPt_trigOn_C1","muPt_trigOn, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_trigOn[2] = new TH1D("muPt_trigOn_C2","muPt_trigOn, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_trigOn[3] = new TH1D("muPt_trigOn_C3","muPt_trigOn, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_trigOn[4] = new TH1D("muPt_trigOn_C4","muPt_trigOn, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_trigOn[0] = new TH1D("muPt_trigOn_C0","muPt_trigOn, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_trigOn[1] = new TH1D("muPt_trigOn_C1","muPt_trigOn, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_trigOn[2] = new TH1D("muPt_trigOn_C2","muPt_trigOn, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_trigOn[3] = new TH1D("muPt_trigOn_C3","muPt_trigOn, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_trigOn[4] = new TH1D("muPt_trigOn_C4","muPt_trigOn, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
 	
-	TH1D *muPt_all[0] = new TH1D("muPt_all_C0","muPt_all, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_all[1] = new TH1D("muPt_all_C1","muPt_all, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_all[2] = new TH1D("muPt_all_C2","muPt_all, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_all[3] = new TH1D("muPt_all_C3","muPt_all, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_all[4] = new TH1D("muPt_all_C4","muPt_all, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_all[0] = new TH1D("muPt_all_C0","muPt_all, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_all[1] = new TH1D("muPt_all_C1","muPt_all, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_all[2] = new TH1D("muPt_all_C2","muPt_all, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_all[3] = new TH1D("muPt_all_C3","muPt_all, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	muPt_all[4] = new TH1D("muPt_all_C4","muPt_all, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
 	
 
 	
