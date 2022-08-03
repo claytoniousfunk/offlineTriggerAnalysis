@@ -35,7 +35,35 @@
 #include "/afs/cern.ch/user/c/cbennett/CMSSW_10_3_3_patch1/src/JetEnergyCorrections/JetCorrector.h"
 #include "/afs/cern.ch/user/c/cbennett/condorSkim/headers/AnalysisSetupV2p0.h"
 
-bool isQualityMuon(double muPt,
+
+
+bool isQualityMuon_soft(double muPt,
+		double muEta, 
+		int muChi2NDF, 
+		double muInnerD0, 
+		double muInnerDz, 
+		int muPixelHits, 
+		int muIsTracker, 
+		int muIsGlobal, 
+		int muTrkLayers){
+
+	bool result = true;
+	if(muPt < 0.0 ||
+			TMath::Abs(muEta) > 2.0 ||
+			muChi2NDF == -99 ||
+			TMath::Abs(muInnerD0) > 0.3 ||
+			TMath::Abs(muInnerDz) > 20 ||
+			muPixelHits <= 0 ||
+			muIsTracker == 0 ||
+			muIsGlobal == 0 ||
+			muTrkLayers <= 5)
+		result = false;
+
+	return result;
+}
+
+
+bool isQualityMuon_hybridSoft(double muPt,
 		double muEta, 
 		int muChi2NDF, 
 		double muInnerD0, 
@@ -146,15 +174,14 @@ void offlineTriggerAnalysis(
 
 			//cout << "hello" << endl;
 				
-			if(!isQualityMuon(em->muPt->at(m),
+			if(!isQualityMuon_soft(em->muPt->at(m),
                                                 em->muEta->at(m),
                                                 em->muChi2NDF->at(m),
                                                 em->muInnerD0->at(m),
                                                 em->muInnerDz->at(m),
-                                                em->muMuonHits->at(m),
                                                 em->muPixelHits->at(m),
                                                 em->muIsTracker->at(m),
-                                                em->muStations->at(m),
+                                                em->muIsGlobal->at(m),
                                                 em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
 
 
