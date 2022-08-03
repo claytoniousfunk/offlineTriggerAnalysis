@@ -1,6 +1,6 @@
 void plotMe(){
 
-	TFile *f = TFile::Open("out.root");
+	TFile *f = TFile::Open("PbPbMB_offlineTriggerAnalysis_3Aug22.root");
 
 	TH1D *m1, *m2;
 
