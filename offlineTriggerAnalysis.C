@@ -68,8 +68,21 @@ void offlineTriggerAnalysis(
 	TString output = "out.root"){
 
 
-	TH1D *muPt_trigOn = new TH1D("muPt_trigOn","muPt_trigOn; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
-	TH1D *muPt_all = new TH1D("muPt_all","muPt_all; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_trigOn[5];
+	TH1D *muPt_all[5];
+
+	TH1D *muPt_trigOn[0] = new TH1D("muPt_trigOn_C0","muPt_trigOn, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_trigOn[1] = new TH1D("muPt_trigOn_C1","muPt_trigOn, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_trigOn[2] = new TH1D("muPt_trigOn_C2","muPt_trigOn, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_trigOn[3] = new TH1D("muPt_trigOn_C3","muPt_trigOn, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_trigOn[4] = new TH1D("muPt_trigOn_C4","muPt_trigOn, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	
+	TH1D *muPt_all[0] = new TH1D("muPt_all_C0","muPt_all, cent. 0-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_all[1] = new TH1D("muPt_all_C1","muPt_all, cent. 0-10%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_all[2] = new TH1D("muPt_all_C2","muPt_all, cent. 10-30%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_all[3] = new TH1D("muPt_all_C3","muPt_all, cent. 30-50%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	TH1D *muPt_all[4] = new TH1D("muPt_all_C4","muPt_all, cent. 50-90%; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
+	
 
 	
 	cout << "Opening file..." << endl;
@@ -112,13 +125,12 @@ void offlineTriggerAnalysis(
 		if(em->hiBin > 180) continue;
 
 
-		//if(em->HLT_HIL3Mu5_NHitQ10_v1==0) continue; // mu5 trigger
 
-		double w = em->HLT_HIL3Mu5_NHitQ10_v1_Prescl * 1.0; // mu 5 prescale
+		double w = em->HLT_HIL3Mu5_NHitQ10_tagging_v1_Prescl * 1.0; // mu 5 prescale
 
 		if(w<=0) continue;
 
-		w = 1.0; // mu 5 prescale
+		w = 1.0; // set prescale
 	
 		//cout << "w = " << w << endl;
 
@@ -149,16 +161,23 @@ void offlineTriggerAnalysis(
 
 			
 			
-			if(em->HLT_HIL3Mu5_NHitQ10_v1 == 1){
+			if(em->HLT_HIL3Mu5_NHitQ10_tagging_v1 == 1){
 
-				muPt_trigOn->Fill(em->muPt->at(m),w);	
+				muPt_trigOn[0]->Fill(em->muPt->at(m),w);
+				if(em->hiBin >= 0 && em->hiBin <=20) muPt_trigOn[1]->Fill(em->muPt->at(m),w);
+				if(em->hiBin > 20 && em->hiBin <=60) muPt_trigOn[2]->Fill(em->muPt->at(m),w);
+				if(em->hiBin > 60 && em->hiBin <=100) muPt_trigOn[3]->Fill(em->muPt->at(m),w);
+				if(em->hiBin > 100 && em->hiBin <=180) muPt_trigOn[4]->Fill(em->muPt->at(m),w);
 
 			}
 
 
+			muPt_all[0]->Fill(em->muPt->at(m),w);
+			if(em->hiBin >= 0 && em->hiBin <=20) muPt_all[1]->Fill(em->muPt->at(m),w);
+			if(em->hiBin > 20 && em->hiBin <=60) muPt_all[2]->Fill(em->muPt->at(m),w);
+			if(em->hiBin > 60 && em->hiBin <=100) muPt_all[3]->Fill(em->muPt->at(m),w);
+			if(em->hiBin > 100 && em->hiBin <=180) muPt_all[4]->Fill(em->muPt->at(m),w);
 			
-			//cout << "muPt = " << em->muPt->at(m) << " | w = " << w << endl;
-			muPt_all->Fill(em->muPt->at(m),w);
 
 		}
 
@@ -167,10 +186,10 @@ void offlineTriggerAnalysis(
 
 auto wf = TFile::Open(output,"recreate");
 
-
-muPt_trigOn->Write();
-muPt_all->Write();
-
+for(int i = 0; i < 5; i++){
+muPt_trigOn[i]->Write();
+muPt_all[i]->Write();
+}
 wf->Close();
 
 return;
