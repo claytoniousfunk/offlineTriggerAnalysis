@@ -83,7 +83,7 @@ void offlineTriggerAnalysis(
 	em->loadMuon("ggHiNtuplizer");
 	em->loadMuonTrigger("hltanalysis");
 	em->loadTrack();
-	em->loadMuonAnalyzer("muonAnalyzer");
+	//em->loadMuonAnalyzer("muonAnalyzer");
 	Long64_t NEvents = em->evtTree->GetEntries();
 	cout << "Number of events = " << NEvents << endl;
 	cout << "Variables initialized!" << endl;
@@ -123,12 +123,12 @@ void offlineTriggerAnalysis(
 		//cout << "w = " << w << endl;
 
 		//cout << "nMu = " << em->nMu << endl;
-		for(int i = 0; i < em->nInner ; i++){
-			//cout << "innerNTrkHits = " << em->innerNTrkHits->at(i) << endl;
+		//for(int i = 0; i < em->nInner ; i++){
+		//	//cout << "innerNTrkHits = " << em->innerNTrkHits->at(i) << endl;
 
-		}
+		//}
 
-		cout << "nMu = " << em->nMu << " | nInner = " << em->nInner << endl;
+		//cout << "nMu = " << em->nMu << " | nInner = " << em->nInner << endl;
 		
 		for(int m = 0; m < em->nMu; m++){
 
