@@ -1,6 +1,4 @@
 
-#include "/home/clayton/Analysis/code/myProcesses/hiforest/plugin/eventMap_hiForest.h" // local testing
-#include "/home/clayton/Analysis/code/JetEnergyCorrections/JetCorrector.h" // local testing
 #include <iostream>
 #include "TFile.h"
 #include "TRandom.h"
@@ -31,9 +29,11 @@
 #include <stdio.h> 
 #include <string.h> 
 #include <stdlib.h>
-#include "/home/clayton/Analysis/code/headers/AnalysisSetupV2p0.h"
 
 
+#include "/afs/cern.ch/user/c/cbennett/CMSSW_10_3_3_patch1/src/myProcesses/hiforest/plugin/eventMap_hiForest.h"
+#include "/afs/cern.ch/user/c/cbennett/CMSSW_10_3_3_patch1/src/JetEnergyCorrections/JetCorrector.h"
+#include "/afs/cern.ch/user/c/cbennett/condorSkim/currentCode/AnalysisSetupV2p0.h"
 
 bool isQualityMuon(double muPt,
 		double muEta, 
@@ -64,8 +64,8 @@ bool isQualityMuon(double muPt,
 }
 
 void offlineTriggerAnalysis(
-	TString input = "/home/clayton/Analysis/code/offlineTriggerAnalysis/HiForestMiniAOD.root",
-	TString output = "/home/clayton/Analysis/code/offlineTriggerAnalysis/out.root"){
+	TString input = "root://cmsxrootd.fnal.gov//store/user/cbennett/PbPbMB_Run2MiniAOD_slimmed_2Aug22/HIMinimumBias0/crab_PbPbMB_Run2MiniAOD_slimmed_2Aug22/220802_155050/0000/HiForestMiniAOD_100.root",
+	TString output = "out.root"){
 
 
 	TH1D *muPt_trigOn = new TH1D("muPt_trigOn","muPt_trigOn; muPt [GeV]; Entries",NMuPtBins,muPtMin,muPtMax);
@@ -83,6 +83,7 @@ void offlineTriggerAnalysis(
 	em->loadMuon("ggHiNtuplizer");
 	em->loadMuonTrigger("hltanalysis");
 	em->loadTrack();
+	em->loadMuonAnalyzer("muonAnalyzer");
 	Long64_t NEvents = em->evtTree->GetEntries();
 	cout << "Number of events = " << NEvents << endl;
 	cout << "Variables initialized!" << endl;
@@ -97,7 +98,7 @@ void offlineTriggerAnalysis(
 	// event loop
 	int evi_frac = 0;
 	for(int evi = 0; evi < NEvents; evi++){
-	//for(int evi = 1; evi < 5; evi++){	
+	//for(int evi = 1; evi < 10000; evi++){	
 
 		em->getEvent(evi);
 
@@ -114,11 +115,21 @@ void offlineTriggerAnalysis(
 		//if(em->HLT_HIL3Mu5_NHitQ10_v1==0) continue; // mu5 trigger
 
 		double w = em->HLT_HIL3Mu5_NHitQ10_tagging_v1_Prescl * 1.0; // mu 5 prescale
+
+		if(w<=0) continue;
+
+		//double w = 1.0; // mu 5 prescale
 	
 		//cout << "w = " << w << endl;
 
 		//cout << "nMu = " << em->nMu << endl;
+		for(int i = 0; i < em->nInner ; i++){
+			//cout << "innerNTrkHits = " << em->innerNTrkHits->at(i) << endl;
 
+		}
+
+		cout << "nMu = " << em->nMu << " | nInner = " << em->nInner << endl;
+		
 		for(int m = 0; m < em->nMu; m++){
 
 			//cout << "hello" << endl;
@@ -132,7 +143,10 @@ void offlineTriggerAnalysis(
                                                 em->muPixelHits->at(m),
                                                 em->muIsTracker->at(m),
                                                 em->muStations->at(m),
-                                                em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts	
+                                                em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
+
+
+
 			
 			
 			if(em->HLT_HIL3Mu5_NHitQ10_tagging_v1 == 1){
@@ -140,7 +154,10 @@ void offlineTriggerAnalysis(
 				muPt_trigOn->Fill(em->muPt->at(m),w);	
 
 			}
+
+
 			
+			//cout << "muPt = " << em->muPt->at(m) << " | w = " << w << endl;
 			muPt_all->Fill(em->muPt->at(m),w);
 
 		}
