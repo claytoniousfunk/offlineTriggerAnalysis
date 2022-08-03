@@ -1,14 +1,14 @@
 void plotMe(){
 
-	TFile *f = TFile::Open("rootFiles/PbPbMB_offlineTriggerAnalysis.root");
+	TFile *f = TFile::Open("rootFiles/PbPbMB_offlineTriggerAnalysis_softMuons.root");
 	
 	TString triggerName = "HLT_HIL3Mu5_NHitQ10_tagging_v1";	
 
 
 	TH1D *m1, *m2;
 
-	f->GetObject("muPt_trigOn_C4",m1);
-	f->GetObject("muPt_all_C4",m2);
+	f->GetObject("muPt_trigOn_C3",m1);
+	f->GetObject("muPt_all_C3",m2);
 
 	TCanvas *c1 = new TCanvas("c1","c1",600,600);
 	c1->cd();
