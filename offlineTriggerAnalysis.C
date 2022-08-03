@@ -33,7 +33,7 @@
 
 #include "/afs/cern.ch/user/c/cbennett/CMSSW_10_3_3_patch1/src/myProcesses/hiforest/plugin/eventMap_hiForest.h"
 #include "/afs/cern.ch/user/c/cbennett/CMSSW_10_3_3_patch1/src/JetEnergyCorrections/JetCorrector.h"
-#include "/afs/cern.ch/user/c/cbennett/condorSkim/currentCode/AnalysisSetupV2p0.h"
+#include "/afs/cern.ch/user/c/cbennett/condorSkim/headers/AnalysisSetupV2p0.h"
 
 bool isQualityMuon(double muPt,
 		double muEta, 
