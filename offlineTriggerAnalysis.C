@@ -86,7 +86,7 @@ bool isQualityMuon_hybridSoft(int muChi2NDF,
 }
 
 void offlineTriggerAnalysis(
-	TString input = "root://cmsxrootd.fnal.gov//store/user/cbennett/PbPbMB_Run2MiniAOD_slimmed_2Aug22/HIMinimumBias0/crab_PbPbMB_Run2MiniAOD_slimmed_2Aug22/220802_155050/0000/HiForestMiniAOD_100.root",
+	TString input = "root://cmsxrootd.fnal.gov//store/user/cbennett/PbPbMB_Run2MiniAOD_slimmed_4Aug22/HIMinimumBias0/crab_PbPbMB_Run2MiniAOD_slimmed_4Aug22/220803_193159/0000/HiForestMiniAOD_100.root",
 	TString output = "out.root"){
 
 
