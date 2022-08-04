@@ -148,7 +148,7 @@ void offlineTriggerAnalysis(
 
 
 
-		double w = em->HLT_HIL3Mu5_NHitQ10_tagging_v1_Prescl * 1.0; // mu 5 prescale
+		double w = em->HLT_HIL3Mu5_NHitQ10_v1_Prescl * 1.0; // mu 5 prescale
 
 		if(w<=0) continue;
 
@@ -185,7 +185,7 @@ void offlineTriggerAnalysis(
 		
 			
 			
-			if(em->HLT_HIL3Mu5_NHitQ10_tagging_v1 == 1){
+			if(em->HLT_HIL3Mu5_NHitQ10_v1 == 1){
 
 				muPt_trigOn[0]->Fill(em->muPt->at(m),w);
 				if(em->hiBin >= 0 && em->hiBin <=20) muPt_trigOn[1]->Fill(em->muPt->at(m),w);
