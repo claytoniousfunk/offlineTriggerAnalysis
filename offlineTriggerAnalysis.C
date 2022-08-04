@@ -172,20 +172,8 @@ void offlineTriggerAnalysis(
 		
 		for(int m = 0; m < em->nMu; m++){
 
-			//cout << "hello" << endl;
-			if(em->muPt->at(m) < 15){	
-				if(!isQualityMuon_soft(em->muPt->at(m),
-                                                em->muEta->at(m),
-                                                em->muChi2NDF->at(m),
-                                                em->muInnerD0->at(m),
-                                                em->muInnerDz->at(m),
-                                                em->muPixelHits->at(m),
-                                                em->muIsTracker->at(m),
-                                                em->muIsGlobal->at(m),
-                                                em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
-			}
-			else{
-				if(!isQualityMuon_hybridSoft(em->muPt->at(m),
+			
+			if(!isQualityMuon_hybridSoft(em->muPt->at(m),
                                                 em->muEta->at(m),
                                                 em->muChi2NDF->at(m),
                                                 em->muInnerD0->at(m),
@@ -195,7 +183,7 @@ void offlineTriggerAnalysis(
                                                 em->muIsTracker->at(m),
                                                 em->muStations->at(m),
                                                 em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
-			}
+			
 
 
 			
