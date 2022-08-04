@@ -63,27 +63,25 @@ bool isQualityMuon_soft(double muPt,
 }
 
 
-bool isQualityMuon_hybridSoft(double muPt,
-		double muEta, 
-		int muChi2NDF, 
+bool isQualityMuon_hybridSoft(int muChi2NDF, 
 		double muInnerD0, 
 		double muInnerDz, 
 		int muMuonHits, 
 		int muPixelHits, 
-		int muIsTracker, 
+		int muIsTracker,
+		int muIsPF, 
 		int muStations, 
 		int muTrkLayers){
 
 	bool result = true;
-	if(muPt < 0.0 ||
-			TMath::Abs(muEta) > 2.0 ||
-			muChi2NDF == -99 ||
+	if(muChi2NDF == -99 ||
 			muChi2NDF > 10 ||
 			TMath::Abs(muInnerD0) > 0.2 ||
 			TMath::Abs(muInnerDz) > 0.5 ||
 			muMuonHits <= 0 ||
 			muPixelHits <= 0 ||
 			muIsTracker == 0 ||
+			muIsPF == 0 ||
 			muStations  <= 1 ||
 			muTrkLayers <= 5)
 		result = false;
@@ -172,20 +170,23 @@ void offlineTriggerAnalysis(
 		
 		for(int m = 0; m < em->nMu; m++){
 
-			
-			if(!isQualityMuon_hybridSoft(em->muPt->at(m),
-                                                em->muEta->at(m),
-                                                em->muChi2NDF->at(m),
+
+			// muon kinematic cuts
+			if(fabs(em->muEta->at(m)) > 2.0) continue;
+
+			// muon quality cuts
+			if(!isQualityMuon_hybridSoft(em->muChi2NDF->at(m),
                                                 em->muInnerD0->at(m),
                                                 em->muInnerDz->at(m),
 						em->muMuonHits->at(m),
                                                 em->muPixelHits->at(m),
                                                 em->muIsTracker->at(m),
+						em->muIsPF->at(m),
                                                 em->muStations->at(m),
                                                 em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
 			
 
-
+		
 			
 			
 			if(em->HLT_HIL3Mu5_NHitQ10_tagging_v1 == 1){
