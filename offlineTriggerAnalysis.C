@@ -64,7 +64,7 @@ bool isQualityMuon_hybridSoft(int muChi2NDF,
 		double muInnerDz, 
 		int muMuonHits, 
 		int muPixelHits, 
-		int muIsTracker,
+		int muIsGlobal,
 		int muIsPF, 
 		int muStations, 
 		int muTrkLayers){
@@ -76,7 +76,7 @@ bool isQualityMuon_hybridSoft(int muChi2NDF,
 			TMath::Abs(muInnerDz) > 0.5 ||
 			muMuonHits <= 0 ||
 			muPixelHits <= 0 ||
-			muIsTracker == 0 ||
+			muIsGlobal == 0 ||
 			muIsPF == 0 ||
 			muStations  <= 1 ||
 			muTrkLayers <= 5)
@@ -176,7 +176,7 @@ void offlineTriggerAnalysis(
                                                 em->muInnerDz->at(m),
 						em->muMuonHits->at(m),
                                                 em->muPixelHits->at(m),
-                                                em->muIsTracker->at(m),
+                                                em->muIsGlobal->at(m),
 						em->muIsPF->at(m),
                                                 em->muStations->at(m),
                                                 em->muTrkLayers->at(m))) continue; // skip if muon doesnt pass quality cuts
