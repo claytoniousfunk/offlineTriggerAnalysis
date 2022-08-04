@@ -37,9 +37,7 @@
 
 
 
-bool isQualityMuon_soft(double muPt,
-		double muEta, 
-		int muChi2NDF, 
+bool isQualityMuon_soft(int muChi2NDF, 
 		double muInnerD0, 
 		double muInnerDz, 
 		int muPixelHits, 
@@ -48,9 +46,7 @@ bool isQualityMuon_soft(double muPt,
 		int muTrkLayers){
 
 	bool result = true;
-	if(muPt < 0.0 ||
-			TMath::Abs(muEta) > 2.0 ||
-			muChi2NDF == -99 ||
+	if(muChi2NDF == -99 ||
 			TMath::Abs(muInnerD0) > 0.3 ||
 			TMath::Abs(muInnerDz) > 20 ||
 			muPixelHits <= 0 ||
